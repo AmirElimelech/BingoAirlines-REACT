@@ -1,0 +1,39 @@
+.dropdown {
+    position: absolute;
+    top: auto;  
+    right: 0px;
+    width: 200px;
+    height: auto;
+    margin-top: -11px;
+    background-color: rgba(78, 109, 155, 0.7);
+    border-radius: 0 0 20px 20px;
+    overflow-y: auto;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1299;
+    
+}
+
+.dropdown a {
+    display: block;
+    padding: 20px 5px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border-radius: 20px; 
+}
+
+.dropdown a:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
+    text-decoration: none;
+}
+
+
+.dropdown a.top-space {
+    margin-top: 20px; 
+}
+
+
+
+
+

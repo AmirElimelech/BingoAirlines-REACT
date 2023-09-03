@@ -1,0 +1,63 @@
+
+
+.user-profile-update-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 50px); /* Assuming the height of the TopBar is 50px. Adjust if different. */
+    padding-top: 10px; /* Same as TopBar height to account for it */
+}
+
+.user-profile-update {
+    width: 60%;
+    max-width: 400px;
+    margin: auto;  /* Centers the form within the container */
+    padding: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 20px; 
+}
+
+.user-profile-update h2 {
+    text-align: center;
+    margin-bottom: 15px;  /* Reduced margin for a tighter look */
+    
+}
+
+.user-profile-update form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;  /* Reduced gap for a tighter look */
+    
+}
+
+.user-profile-update label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;  /* Reduced gap for a tighter look */
+    
+}
+
+.user-profile-update input {
+    padding: 8px;  /* Reduced padding for a tighter look */
+    border: 1px solid #ccc;
+    font-size: 15px;  /* Reduced font size for a tighter look */
+    border-radius: 15px;
+    text-align: center;
+}
+
+.user-profile-update button {
+    padding: 8px 12px;  /* Reduced padding for a tighter look */
+    background-color: #007bff;
+    border: none;
+    border-radius: 15px;
+    color: #ffffff;
+    font-size: 15px;  /* Reduced font size for a tighter look */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.user-profile-update button:hover {
+    background-color: #0056b3;
+}

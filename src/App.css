@@ -1,5 +1,20 @@
 .App {
   text-align: center;
+  background-image: url('./assets/images/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-y: auto; /* allows scrolling within the App container */
+  transition: background-color 1s ease-out;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+ 
 }
 
 .App-logo {
@@ -35,4 +50,24 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.fade-in {
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

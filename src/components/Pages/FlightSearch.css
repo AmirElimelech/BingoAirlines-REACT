@@ -1,0 +1,256 @@
+
+
+.flight-search-container {
+    position: relative;
+    z-index: 1000; 
+    top: 90px; /* to center it vertically a bit */
+    width: 200%; /* occupy 90% of the parent's width */
+    max-width: 200px;
+    max-height: 40px; 
+    margin: 0 auto; /* horizontally center the container */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #3f68a77e;
+    border-radius: 15px;
+    box-shadow: 0 10px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+}
+
+
+.flight-search-container label {
+
+    color: #020202be;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px; /* adjust as needed */
+    margin-top: 5px;
+    background-color: #f5f5f5;
+    
+
+}
+
+.input-with-label {
+    position: relative;
+    display: inline-block;
+}
+
+.input-with-label .inner-label {
+    position: absolute;
+    left: 15px; /* Adjust this value to move the text more to the right */
+    top: 30%;  /* Adjust this value to move the text up a bit */
+    pointer-events: none; /* Ensure the input is clickable even when over the label */
+}
+
+.input-with-label input[type="date"] {
+    width: 200 px;
+    padding-left: 80px; /* Provide space for the inner label (e.g., "Departure") */
+    padding-right: 30px; 
+    text-align: right; /* Make the date appear on the right side */
+}
+
+
+.inner-label {
+    position: absolute;
+    left: 10px;  /* Adjust as needed */
+    top: 50%;  /* Center the label vertically */
+    transform: translateY(-50%); /* Fine-tune the vertical centering */
+    pointer-events: none;  /* So that it doesn't interfere with the input */
+    color: #aaa;  /* You can adjust the color */
+}
+
+
+.input-with-label input[type="date"] {
+    width: 300px; /* Adjust this value to your desired width */
+    padding-left: 80px; /* This keeps the inner-label (e.g., "Departure", "Return") positioned correctly */
+    padding-right: 20px; /* Additional padding to the right */
+}
+
+
+.flight-search-container h1 {
+    margin-top: 10px; /* Adjust this value as per your requirement */
+    margin-bottom: 35px;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.flight-search-container input,
+.flight-search-container select {
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-style: bold;
+
+}
+
+.flight-search-container button {
+    padding: 10px 20px;
+    background-color: #c3cad3;
+    color: #131b31;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.flight-search-container button:hover {
+    background-color: #007bff;
+}
+
+
+.flight-search-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+.flight-search-form select[name="flightType"],
+.flight-search-form input[type="date"] {
+    grid-column: 1 / -1; /* Span the full width */
+}
+
+
+
+
+datalist {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+datalist option {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out; /* Smooth transition for transformations */
+}
+
+datalist option:hover {
+    background-color: #ccc;
+    transform: scale(1.05); /* Zoom in a bit on hover */
+}
+
+
+
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    opacity: 0; /* Start as invisible */
+    transition: opacity 0.5s ease-in-out; /* Transition effect for opacity */
+}
+
+.fade-in {
+    opacity: 1; /* Fully visible */
+}
+
+.fade-out {
+    opacity: 0; /* Fully invisible */
+}
+
+
+.loading-container img {
+    width: 100px;   
+    height: 100px;  
+}
+
+
+.airport-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Stack children vertically */
+    gap: 5px; /* Small gap between children */
+}
+
+.airport-detail {
+    text-align: center; /* Center the text inside each detail */
+}
+
+.to-divider {
+    text-align: center; /* Center the 'to' divider */
+}
+
+
+
+
+/* Separator */
+
+
+.flight-separator {
+    text-align: center;
+    padding-top: 20px; /* Adjust as per your design preference */
+    padding-bottom: 0px; /* Adjust as per your design preference */
+    position: relative;
+}
+
+.flight-separator::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-top: 2px solid #ccc; /* This is the line separator */
+    width: 100%;
+}
+
+
+
+/* flight results */
+
+
+.flight-results-container {
+    position: relative;
+    z-index: 1; 
+    top: 50px; 
+    width: 200%; 
+    max-width: 300px;
+    max-height: 40px; 
+    margin: 0 auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;    
+    
+    
+}
+
+
+
+
+
+
+.single-flight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 20px ; 
+    width: 700px;
+    max-width:  700px;
+    color: #d3cdcd;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border: 3px solid #9b9a9a;
+    border-radius: 15px;
+    box-shadow: 0 10px 5px rgba(0, 0, 0, 0.1);
+    background-color: rgba(58, 71, 90, 0.6);
+     
+}
+
+

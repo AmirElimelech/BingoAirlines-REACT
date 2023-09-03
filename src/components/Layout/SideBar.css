@@ -1,0 +1,35 @@
+.sidebar {
+    position: fixed;
+    top: 15vh;
+    left: -16vw; /* Initially hidden */
+    width: 15vw;
+    height: 70vh;
+    background-color: rgba(78, 109, 155, 0.7); /* Change to your desired color */
+    border-radius: 0 20px 20px 0; /* Rounded edges on the right side */
+    transition: left 0.3s; /* Smooth transition */
+    overflow-y: auto; /* Scrollable if content exceeds height */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Optional shadow */
+    /* visibility: hidden; */
+}
+
+.sidebar.show {
+    left: 0; /* Show sidebar */
+    /* visibility: visible; */
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px 15px;
+    color: white; /* or any color you prefer */
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border-radius: 20px; 
+}
+
+.sidebar a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Adds a slight highlight on hover */
+}
+
+
+

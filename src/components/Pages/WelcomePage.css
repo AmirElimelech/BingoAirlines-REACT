@@ -1,0 +1,21 @@
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    opacity: 1;
+    background-color: white; /* Set white background */
+    transition: opacity 1s ease-out;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
+}
+
+.welcome-logo {
+    width: 600px; 
+    margin-bottom: 40px; /* Give some space between the logo and the loading gif */
+}
+
+.welcome-loading-gif {
+    width: 250px; /* Adjust as needed */
+}

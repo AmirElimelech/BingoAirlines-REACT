@@ -1,0 +1,137 @@
+.table-container {
+    margin: 20px;
+    overflow-y: auto; /* For horizontal scrolling if the table is too wide */
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    
+}
+
+th, td {
+    padding: 8px 12px;
+    text-align: left;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Zebra stripe for alternating rows */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Responsive table for smaller screens */
+@media screen and (max-width: 600px) {
+    table, th, td {
+        display: block;
+    }
+
+    th, td {
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    th::before, td::before {
+        content: attr(data-label);
+        flex-basis: 50%;
+        padding-right: 10px;
+    }
+}
+
+.table-wrapper {
+    width: 80%;
+    margin: 90px auto; /* Add 40px margin to the top and bottom */
+    padding: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    background-color: #ffffffd8;
+    border-radius: 20px;
+}
+
+.table-container th, .table-container td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center; 
+}
+
+.search-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* This will make it take the full height of the viewport */
+}
+
+.search-bar {
+    display: flex;
+    gap: 10px; /* This will add some space between the input and the button */
+    margin-bottom: 20px; /* Space between the search bar and the table */
+}
+
+.search-bar input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 250px; /* Adjust as needed */
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: #007BFF; /* You can adjust this color */
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+}
+
+search-bar input.error-input {
+    background-color: #e20404a6;
+}
+
+
+@keyframes flashing {
+    0%  { background-color: transparent; }
+    50% { background-color: rgba(204, 2, 2, 0.055); }
+   100% { background-color: transparent; }
+
+}
+
+.flashing-row {
+    animation: flashing 2s infinite;
+}
+
+
+.nowrap {
+    white-space: nowrap;
+}
+

@@ -1,0 +1,19 @@
+.fixed-pagination-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.25); /* 25% transparency */
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: opacity 0.3s; 
+    opacity: 0.25; /* this will make everything 25% transparent */
+}
+
+.fixed-pagination-bar:hover {
+    opacity: 1; /* 100% opaque on hover */
+}
