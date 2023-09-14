@@ -20,7 +20,8 @@ const csrfToken = getCookie('csrftoken');
 
 // Create an Axios instance with configurations
 const axiosInstance = axios.create({
-    baseURL: 'http://127.0.0.1:8000/',
+    // baseURL: 'http://127.0.0.1:8000/',
+    baseURL: 'https://bingoairlines.com/',
     headers: {
         'X-CSRFToken': csrfToken 
     },

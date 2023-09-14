@@ -115,7 +115,8 @@ function Register() {
                 formData.append('customer[credit_card_no]', customerData.credit_card_no);
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/Api/user_registration_api/', {
+            // const response = await fetch('http://127.0.0.1:8000/Api/user_registration_api/', {
+            const response = await fetch('https://bingoairlines.com/Api/user_registration_api/', {
                 method: 'POST',
                 body: formData
             });
@@ -143,6 +144,7 @@ function Register() {
                 placeholder="ID" 
                 value={userData.id} 
                 onChange={e => setUserData(prev => ({ ...prev, id: e.target.value }))}
+                maxLength={9}
             />
             <input 
                 type="text" 

@@ -1,7 +1,7 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { axiosInstance } from '../../utils/axiosUtils'; 
+import { axiosInstance } from '../../../utils/axiosUtils'; 
 import { useParams } from 'react-router-dom';
 import './BookingDetail.css' ; 
 import { useNavigate } from 'react-router-dom';

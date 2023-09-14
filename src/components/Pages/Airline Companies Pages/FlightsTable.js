@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../src/components/Common/GenericTable.css';
+import '../../Common/GenericTable.css';
 import { useNavigate } from 'react-router-dom';
 
 function getValueByPath(obj, path) {
@@ -24,7 +24,8 @@ function FlightsTable({ axiosInstance }) {
 
     useEffect(() => {
         const axiosToUse = axiosInstance;
-        axiosToUse.get("http://127.0.0.1:8000/Api/airline/flights2/")
+        // axiosToUse.get("http://127.0.0.1:8000/Api/airline/flights/")
+        axiosToUse.get("https://bingoairlines.com/Api/airline/flights/")
             .then(response => {
                 if (Array.isArray(response.data)) {
                     setData(response.data);

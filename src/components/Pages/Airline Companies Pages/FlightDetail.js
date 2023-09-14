@@ -1,7 +1,7 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { axiosInstance } from './utils/axiosUtils'; 
+import { axiosInstance } from '../../../utils/axiosUtils'; 
 import { useParams } from 'react-router-dom';
 import './FlightDetail.css'; 
 import { useNavigate } from 'react-router-dom';
@@ -33,11 +33,30 @@ function FlightDetail() {
     };
 
 
-         
+    const [airports, setAirports] = useState([]);     
 
+
+    const formatDateTimeWithOffset = (dateTimeString) => {
+        // If the dateTimeString already has an offset, just return it
+        if (dateTimeString.match(/\+\d{2}:\d{2}$/)) {
+            dateTimeString = dateTimeString.substring(0, dateTimeString.length - 6);
+        }
+    
+        const date = new Date(dateTimeString);
+        const offset = date.getTimezoneOffset();
+        const offsetHours = Math.floor(Math.abs(offset) / 60);
+        const offsetMinutes = Math.abs(offset) % 60;
+        const offsetSign = offset < 0 ? '+' : '-';
+        const offsetString = `${offsetSign}${String(offsetHours).padStart(2, '0')}:${String(offsetMinutes).padStart(2, '0')}`;
+    
+        // Ensure that the seconds are included
+        const formattedDateTime = dateTimeString.length === 16 ? `${dateTimeString}:00` : dateTimeString;
+        
+        return `${formattedDateTime}${offsetString}`;
+    };
 
     useEffect(() => {
-        axiosInstance.get(`/Api/airline/flights2/${id}/`)
+        axiosInstance.get(`/Api/airline/flights/${id}/`)
             .then(response => {
                 setFlight(response.data);
             })
@@ -46,10 +65,25 @@ function FlightDetail() {
             });
     }, [id]);
 
+
+    useEffect(() => {
+        // Fetch airports from the API when the component mounts
+        // axiosInstance.get('http://127.0.0.1:8000/Api/airports/')
+        axiosInstance.get('https://bingoairlines.com/Api/airports/')
+            .then(response => {
+                setAirports(response.data);
+            })
+            .catch(error => {
+                console.error("Error fetching airports:", error);
+            });
+    }, []);
+
+
+
     const handleDelete = (flightId) => {
         const userConfirmation = window.confirm("Are you sure you want to delete this flight?");
         if (userConfirmation) {
-            axiosInstance.delete(`/Api/airline/flights2/${flightId}/remove/`)
+            axiosInstance.delete(`/Api/airline/flights/${flightId}/remove/`)
             .then(response => {
                 console.log("Flight deleted successfully", response.data);
                 navigate('/');
@@ -70,10 +104,13 @@ function FlightDetail() {
             return;
         }
 
-        if (!isValidIataCode(flight.origin_airport.name) || !isValidIataCode(flight.destination_airport.name)) {
+
+
+        if (!isValidIataCode(flight.origin_airport.iata_code) || !isValidIataCode(flight.destination_airport.iata_code)) {
             alert("Please enter a valid 3-character IATA code for the airports.");
             return;
         }
+
     
         if (isDateInPast(flight.departure_time)) {
             alert("The departure date cannot be in the past.");
@@ -86,18 +123,26 @@ function FlightDetail() {
         }
 
 
+
+
+        
+
+
         const updatedFlight = {
             id: flight.id,
-            // flight_number: flight.flight_number,
-            // airline_company_id: flight.airline_company.name,
-            origin_airport: flight.origin_airport.name,
-            destination_airport: flight.destination_airport.name,
-            departure_time: flight.departure_time,
-            landing_time: flight.landing_time,
+            origin_airport: flight.origin_airport.iata_code,
+            destination_airport: flight.destination_airport.iata_code,
+            departure_time: formatDateTimeWithOffset(flight.departure_time),
+            landing_time: formatDateTimeWithOffset(flight.landing_time),
             remaining_tickets: flight.remaining_tickets,
             departure_terminal: flight.departure_terminal,
             arrival_terminal: flight.arrival_terminal
         };
+        
+        
+        
+
+        
 
         axiosInstance.put(`/Api/airline/flights/update/`, updatedFlight)
             .then(response => {
@@ -119,31 +164,57 @@ function FlightDetail() {
             <h2>Flight Details</h2>
             {isEditing ? (
                 <div className="flight-edit-container">
-                        {/* Render input fields for editing flight details */}
-                        {/* <div className="flight-edit-row">
-                            <label>Airline:</label>
-                            <input type="text" value={flight.airline_company.name} onChange={e => setFlight({...flight, airline_company: {...flight.airline_company, name: e.target.value}})} />
-                        </div> */}
-                        {/* <div className="flight-edit-row">
-                            <label>Flight Number:</label>
-                            <input type="text" value={flight.flight_number} onChange={e => setFlight({...flight, flight_number: e.target.value})} />
-                        </div> */}
                         <div className="flight-edit-row">
                             <label>Origin Airport:</label>
-                            <input type="text" value={flight.origin_airport.name} onChange={e => setFlight({...flight, origin_airport: {...flight.origin_airport, name: e.target.value}})} />
+                            <select 
+                                value={flight.origin_airport.iata_code} 
+                                onChange={e => {
+                                    const selectedAirport = airports.find(airport => airport.iata_code === e.target.value);
+                                    setFlight({...flight, origin_airport: {name: selectedAirport.name, iata_code: selectedAirport.iata_code}});
+                                }}
+                            >
+                                <option value="">Select an Airport</option>
+                                {airports.map(airport => (
+                                    <option key={airport.iata_code} value={airport.iata_code}>{airport.name} ({airport.iata_code})</option>
+                                ))}
+                            </select>
                         </div>
                         <div className="flight-edit-row">
                             <label>Destination Airport:</label>
-                            <input type="text" value={flight.destination_airport.name} onChange={e => setFlight({...flight, destination_airport: {...flight.destination_airport, name: e.target.value}})} />
+                            <select 
+                                value={flight.destination_airport.iata_code} 
+                                onChange={e => {
+                                    const selectedAirport = airports.find(airport => airport.iata_code === e.target.value);
+                                    setFlight({...flight, destination_airport: {name: selectedAirport.name, iata_code: selectedAirport.iata_code}});
+                                }}
+                            >
+                                <option value="">Select an Airport</option>
+                                {airports.map(airport => (
+                                    <option key={airport.iata_code} value={airport.iata_code}>{airport.name} ({airport.iata_code})</option>
+                                ))}
+                            </select>
                         </div>
+
                         <div className="flight-edit-row">
                             <label>Departure Time:</label>
-                            <input type="text" value={flight.departure_time} onChange={e => setFlight({...flight, departure_time: e.target.value})} />
+                            <input 
+                                type="datetime-local" 
+                                value={flight.departure_time.substring(0, 16)} 
+                                onChange={e => setFlight({...flight, departure_time: e.target.value})}
+                            />
                         </div>
                         <div className="flight-edit-row">
                             <label>Landing Time:</label>
-                            <input type="text" value={flight.landing_time} onChange={e => setFlight({...flight, landing_time: e.target.value})} />
+                            <input 
+                                type="datetime-local" 
+                                value={flight.landing_time.substring(0, 16)} 
+                                onChange={e => setFlight({...flight, landing_time: e.target.value})}
+                            />
                         </div>
+
+
+
+
                         <div className="flight-edit-row">
                             <label>Remaining Tickets:</label>
                             <input type="number" value={flight.remaining_tickets} onChange={e => setFlight({...flight, remaining_tickets: e.target.value})} />

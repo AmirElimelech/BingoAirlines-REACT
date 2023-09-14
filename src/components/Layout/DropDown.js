@@ -24,9 +24,7 @@ function DropDown({ userRole, onOptionClick }) {
     if (userRole === 'Administrator') {
         options = [
             'View All Customers',
-            'Add Customer',
-            'Add Airline Company',
-            'Add Administrator',
+            'Add User',
            
         ];
         links = {
@@ -58,12 +56,8 @@ function DropDown({ userRole, onOptionClick }) {
         >
             {options.map((option, index) => {
                         switch (option) {
-                            case 'Add Customer':
-                                return <Link key={index} to="/add-customer">{option}</Link>;
-                            case 'Add Airline Company':
-                                return <Link key={index} to="/add-airline">{option}</Link>;
-                            case 'Add Administrator':
-                                return <Link key={index} to="/add-administrator">{option}</Link>;
+                            case 'Add User':
+                                return <Link key={index} to="/add-user">{option}</Link>;
                             default:
                                 return (
                                     <Link 

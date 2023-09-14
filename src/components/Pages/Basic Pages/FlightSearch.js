@@ -1,8 +1,12 @@
-import React, { useState , useEffect  } from 'react';
+import React, { useState , useEffect , useContext } from 'react';
 import axios from 'axios';
 import './FlightSearch.css';
-import loadingGif from '../../assets/images/loading.gif';
-import Pagination from '../Common/Pagination';
+import loadingGif from '../../../assets/images/loading.gif';
+import Pagination from '../../Common/Pagination';
+import { useNavigate } from 'react-router-dom';
+import UserContext from '../../../contexts/UserContext';
+
+
 
 
 const FlightSearch = () => {
@@ -57,7 +61,9 @@ const FlightSearch = () => {
     
     const fetchAirportInfo = async (iataCode) => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/Api/airport/${iataCode}/`, {
+            const response = await axios.get(`https://bingoairlines.com/Api/airport/${iataCode}/`, {
+            // const response = await axios.get(`http://127.0.0.1:8000/Api/airport/${iataCode}/`, {
+
                 withCredentials: true,
 
             });
@@ -102,7 +108,9 @@ const FlightSearch = () => {
     
     const fetchSuggestions = async (inputValue, setInputSuggestions) => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/autocomplete/', {
+            const response = await axios.get('https://bingoairlines.com/Api/autocomplete', {
+
+            // const response = await axios.get('http://127.0.0.1:8000/autocomplete/', {
                 params: {
                     q: inputValue
                 } , 
@@ -147,6 +155,11 @@ const FlightSearch = () => {
             [name]: value
         }));
     };
+
+
+
+    const { user } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const daysDifference = (departureDate, arrivalDate) => {
         const start = new Date(departureDate);
@@ -200,7 +213,9 @@ const FlightSearch = () => {
         setFadeIn(true);
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/Api/flights/search_form_submission/', searchParams, {
+            // const response = await axios.post('http://127.0.0.1:8000/Api/flights/search_form_submission/', searchParams, {
+            const response = await axios.post('https://bingoairlines.com/Api/flights/search_form_submission/', searchParams, {
+
                 headers: {
                     'Content-Type': 'application/json'
                 } , 
@@ -223,6 +238,12 @@ const FlightSearch = () => {
 
 
             const handlePurchase = async (flight) => {
+
+                if (user === null) {
+                    navigate('/login');  // Redirecting to the login page
+                    return;
+                }
+
                 const segments = flight.itineraries[0].segments;
                 const totalPrice = flight.price.grandTotal;
                 const cabin = flight.travelerPricings[0].fareDetailsBySegment[0].cabin;
@@ -255,7 +276,8 @@ const FlightSearch = () => {
             
                 // Send the array of segment payloads as a single POST request
                 try {
-                    const response = await axios.post('http://127.0.0.1:8000/Api/customer/create_booking/', {segments: segmentPayloads}, {
+                    // const response = await axios.post('http://127.0.0.1:8000/Api/customer/create_booking/', {segments: segmentPayloads}, {
+                    const response = await axios.post('https://bingoairlines.com/Api/customer/create_booking/', {segments: segmentPayloads}, {
                         headers: {
                             'Content-Type': 'application/json',
                         },

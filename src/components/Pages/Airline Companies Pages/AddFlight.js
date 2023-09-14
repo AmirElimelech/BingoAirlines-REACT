@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { axiosInstance } from '../../../utils/axiosUtils';
 import './AddFlight.css';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +20,19 @@ function AddFlight() {
     });
 
     const navigate = useNavigate();
+    const [airports, setAirports] = useState([]);
 
+    useEffect(() => {
+        // Fetch airports from the API when the component mounts
+        // axiosInstance.get('http://127.0.0.1:8000/Api/airports/')
+        axiosInstance.get('https://bingoairlines.com/Api/airports/')
+            .then(response => {
+                setAirports(response.data);
+            })
+            .catch(error => {
+                console.error("Error fetching airports:", error);
+            });
+    }, []);
 
     const formatDateTime = (dateTimeString) => {
         const date = new Date(dateTimeString);
@@ -94,8 +106,8 @@ function AddFlight() {
         };
 
         console.log("Sending the following data to the backend:", formattedData);
-
-        axiosInstance.post('http://127.0.0.1:8000/Api/airline/flights/add/', formattedData)
+        // axiosInstance.post('http://127.0.0.1:8000/Api/airline/flights/add/', formattedData)
+        axiosInstance.post('https://bingoairlines.com/Api/airline/flights/add/', formattedData)
             .then(response => {
                 setMessage('Successfully added flight.');
                 setFormData({
@@ -127,27 +139,33 @@ function AddFlight() {
             <div className="table-container">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label>Origin Airport:</label>
-                        <input 
-                            type="text" 
-                            name="origin_airport" 
-                            placeholder="Enter only Airport IATA Code (e.g., TLV, JFK, LHR, etc.)"
-                            value={formData.origin_airport} 
-                            onChange={handleChange} 
-                            required 
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Destination Airport:</label>
-                        <input 
-                            type="text" 
-                            name="destination_airport" 
-                            placeholder="Enter only Airport IATA Code (e.g., ATH, FCO, BCN, etc.)"
-                            value={formData.destination_airport} 
-                            onChange={handleChange} 
-                            required 
-                        />
-                    </div>
+                            <label>Origin Airport:</label>
+                            <select 
+                                name="origin_airport"
+                                value={formData.origin_airport} 
+                                onChange={handleChange} 
+                                required 
+                            >
+                                <option value="">Select an Airport</option>
+                                {airports.map(airport => (
+                                    <option key={airport.iata_code} value={airport.iata_code}>{airport.name} ({airport.iata_code})</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label>Destination Airport:</label>
+                            <select 
+                                name="destination_airport"
+                                value={formData.destination_airport} 
+                                onChange={handleChange} 
+                                required 
+                            >
+                                <option value="">Select an Airport</option>
+                                {airports.map(airport => (
+                                    <option key={airport.iata_code} value={airport.iata_code}>{airport.name} ({airport.iata_code})</option>
+                                ))}
+                            </select>
+                        </div>
                     <div className="form-group">
                         <label>Departure Time:</label>
                         <input 

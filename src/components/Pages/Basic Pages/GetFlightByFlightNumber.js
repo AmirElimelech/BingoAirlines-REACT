@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import GenericTable from '../Common/GenericTable';
-import '../Common/GenericTable.css'
+import GenericTable from '../../Common/GenericTable';
+import '../../Common/GenericTable.css'
 
 const fieldMappingsArray = [
-    { label: "Country Name", key: "name" },
-    { label: "Country Code", key: "country_code" }
+    { label: "Flight Number", key: "flight_number" },
+    { label: "Airline Company", key: "airline_company.name" },
+    { label: "Origin Airport", key: "origin_airport.name" },
+    { label: "Destination Airport", key: "destination_airport.name" },
+    { label: "Departure Time", key: "departure_time" },
+    { label: "Landing Time", key: "landing_time" },
+    { label: "Remaining Tickets", key: "remaining_tickets" },
+    { label: "Departure Terminal", key: "departure_terminal" },
+    { label: "Arrival Terminal", key: "arrival_terminal" }
 ];
 
-function SearchCountryById() {
+function GetFlightByFlightNumber() {
     const [inputValue, setInputValue] = useState('');
     const [data, setData] = useState([]);
     const [isError, setIsError] = useState(false);
-    const baseEndpoint = "http://127.0.0.1:8000/Api/countries/";
+    // const baseEndpoint = "http://127.0.0.1:8000/Api/flights/";
+    const baseEndpoint = "https://bingoairlines.com/Api/flights/";
 
     useEffect(() => {
 
         setIsError(false);
-
-        if (inputValue.length > 2) {
-            setIsError(true);
-            setData([]);
-            return;
-        }
 
         if (inputValue) {
             const endpoint = `${baseEndpoint}${inputValue}/`;
@@ -53,13 +55,12 @@ function SearchCountryById() {
                     type="text" 
                     value={inputValue} 
                     onChange={e => setInputValue(e.target.value)} 
-                    placeholder="Enter Country Code e.g. 'US'"
+                    placeholder="Enter Flight Number e.g. 'LY556'"
                     className={isError ? 'error-input' : ''}
-                    maxLength={2}  // This restricts the input to a maximum of 2 characters
                 />
             </div>
         </div>
     );
 }
 
-export default SearchCountryById;
+export default GetFlightByFlightNumber;

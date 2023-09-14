@@ -7,7 +7,8 @@ import { axiosInstance } from '../../utils/axiosUtils';
 
     
 const defaultFieldMappings = {
-    "http://127.0.0.1:8000/Api/flights/": [
+    // "http://127.0.0.1:8000/Api/flights/": [
+    "https://bingoairlines.com/Api/flights/": [
         { label: "Flight Number", key: "flight_number" },
         { label: "Airline", key: "airline_company.name" },
         { label: "Origin Airport", key: "origin_airport.name" },
@@ -18,22 +19,26 @@ const defaultFieldMappings = {
         { label: "Departure Terminal", key: "departure_terminal" },
         { label: "Arrival Terminal", key: "arrival_terminal" }
     ],
-    "http://127.0.0.1:8000/Api/countries/": [
+    // "http://127.0.0.1:8000/Api/countries/": [
+    "https://bingoairlines.com/Api/countries/": [
         { label: "Country Name", key: "name" },
         { label: "Country Code" , key: "country_code" },
     ],
-    "http://127.0.0.1:8000/Api/airlines/": [
+    // "http://127.0.0.1:8000/Api/airlines/": [
+    "https://bingoairlines.com/Api/airlines/": [
         { label: "IATA Code", key: "iata_code" },
         { label: "Airline Name", key: "name" },
         { label: "Country", key: "country.name" },
         { label: "Country Code", key: "country.country_code" }
     ],
-    "http://127.0.0.1:8000/Api/airports/": [
+    // "http://127.0.0.1:8000/Api/airports/": [
+    "https://bingoairlines.com/Api/airports/": [
         { label: "IATA Code", key: "iata_code" },
         { label: "Airport Name", key: "name" },
         { label: "Country Code", key: "country_code" }
     ],
-    "http://127.0.0.1:8000/Api/customer/bookings/": [
+    // "http://127.0.0.1:8000/Api/customer/bookings/": [
+    "https://bingoairlines.com/Api/customer/bookings/": [
         { label: "Booking Date", key: "booking_date" },
         { label: "Total Price", key: "total_price" },
         { label: "Currency", key: "currency" },
@@ -53,18 +58,20 @@ const defaultFieldMappings = {
         { label: "Child Travelers", key: "child_traveler_count" },
         
     ] ,
-    "http://127.0.0.1:8000/Api/admin/customers/": [
+    // "http://127.0.0.1:8000/Api/admin/customers/": [
+    "https://bingoairlines.com/Api/admin/customers/": [
         { label: "Customer ID", key: "id" },
         { label: "User ID", key: "user_id" },
         { label: "First Name", key: "first_name" },
         { label: "Last Name", key: "last_name" },
         { label: "Phone No.", key: "phone_no" },
         { label: "Credit Card No.", key: "credit_card_no" },
-        { label: "Email", key: "user.email" },
+        { label: "Email", key: "email" },
         { label: "Address", key: "address" },
         
     ],
-    "http://127.0.0.1:8000/Api/airline/flights/": [
+    // "http://127.0.0.1:8000/Api/airline/flights/": [
+    "https://bingoairlines.com/Api/airline/flights/": [
     { label: "Airline", key: "airline_company.name" },
     { label: "Flight Number", key: "flight_number" },
     { label: "Origin Airport", key: "origin_airport.name" },
@@ -114,12 +121,12 @@ function GenericTable({ endpoint, data: externalData, fields: externalFields }) 
                         setData(response.data.results);
                     } else {
                         console.error("Unexpected data format from API:", response.data);
-                        setData([]); // set an empty array to avoid further errors
+                        setData([]); 
                     }
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
-                    setData([]); // set an empty array to avoid further errors
+                    setData([]); 
                 });
         } else if (externalData) {
             setData(externalData);

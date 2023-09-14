@@ -1,7 +1,7 @@
 
 
 import React, { useState, useContext } from 'react';
-import UserContext from '../../contexts/UserContext';
+import UserContext from '../../../contexts/UserContext';
 import './UserProfileUpdate.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +23,9 @@ function getCookie(name) {
 
 // Axios instance configuration
 const axiosInstance = axios.create({
-    baseURL: 'http://127.0.0.1:8000/',
+    // baseURL: 'http://127.0.0.1:8000/',
+    baseURL: 'https://bingoairlines.com/',
+
     timeout: 5000,
     headers: {
         'Content-Type': 'application/json',
@@ -140,7 +142,7 @@ const UserProfileUpdate = () => {
                     </label>
                     <label>
                         Credit Card No:
-                        <input type="text" name="credit_card_no" value={formData.credit_card_no} onChange={handleChange} />
+                        <input type="text" name="credit_card_no" value={formData.credit_card_no} onChange={handleChange} maxLength={16} />
                     </label>
             
                     <button type="submit">Update Profile</button>

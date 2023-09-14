@@ -2,9 +2,10 @@
 
 import React, { useContext } from 'react';
 import './WelcomePage.css';
-import logo from '../../assets/images/BingoAirlinesLogo.png'; 
-import loadingGif from '../../assets/images/welcome_loading.gif';  
-import UserContext from '../../contexts/UserContext';  // <-- Import the UserContext
+import logo from '../../../assets/images/BingoAirlinesLogo.png';
+import loadingGif from '../../../assets/images/welcome_loading.gif';
+
+import UserContext from '../../../contexts/UserContext';  // <-- Import the UserContext
 
 const WelcomePage = () => {
     const { user } = useContext(UserContext);  // <-- Use the UserContext

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import GenericTable from '../Common/GenericTable';
-import '../Common/GenericTable.css'
+import GenericTable from '../../Common/GenericTable';
+import '../../Common/GenericTable.css'
 
 const fieldMappingsArray = [
     { label: "Flight Number", key: "flight_number" },
@@ -20,7 +20,8 @@ function GetFlightByParams() {
     const [destinationAirport, setDestinationAirport] = useState('');
     const [departureDate, setDepartureDate] = useState('');
     const [data, setData] = useState([]);
-    const endpoint = "http://127.0.0.1:8000/Api/flights/search/";
+    // const endpoint = "http://127.0.0.1:8000/Api/flights/search/";
+    const endpoint = "https://bingoairlines.com/Api/flights/search/";
 
     const handleSearch = () => {
 

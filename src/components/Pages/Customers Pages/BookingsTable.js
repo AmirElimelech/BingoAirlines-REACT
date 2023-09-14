@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../Common/GenericTable.css';
+import '../../Common/GenericTable.css';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -38,7 +38,8 @@ function BookingTable({ axiosInstance }) {
 
     useEffect(() => {
         const axiosToUse = axiosInstance || axios;
-        axiosToUse.get("http://127.0.0.1:8000/Api/customer/bookings/")
+        // axiosToUse.get("http://127.0.0.1:8000/Api/customer/bookings/")
+        axiosToUse.get("https://bingoairlines.com/Api/customer/bookings/")
             .then(response => {
                 if (Array.isArray(response.data)) {
                     setData(response.data);
